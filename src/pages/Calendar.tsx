@@ -263,53 +263,51 @@ const Calendar: React.FC = () => {
         + Create Shift Template
       </button>
 
-      {/* Add Shift Modal */}
+      {/* Add Shift Inline */}
       {showAddShift && (
-        <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowAddShift(false)}>
-          <div className="glass-card p-6 w-full max-w-md mx-4 mb-4 md:mb-0 animate-fade-in-up" onClick={e => e.stopPropagation()}>
-            <h2 className="text-lg font-semibold text-foreground mb-4">Add Shift</h2>
-            <div className="space-y-3">
+        <div className="glass-card p-6 w-full animate-fade-in-up">
+          <h2 className="text-lg font-semibold text-foreground mb-4">Add Shift</h2>
+          <div className="space-y-3">
+            <div>
+              <label className="text-sm text-muted-foreground">Job</label>
+              <select value={formJob} onChange={e => setFormJob(e.target.value)}
+                className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50">
+                <option value="">Select job</option>
+                {jobs.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm text-muted-foreground">Job</label>
-                <select value={formJob} onChange={e => setFormJob(e.target.value)}
-                  className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50">
-                  <option value="">Select job</option>
-                  {jobs.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
-                </select>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-sm text-muted-foreground">Start</label>
-                  <input type="time" value={formStart} onChange={e => setFormStart(e.target.value)}
-                    className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">End</label>
-                  <input type="time" value={formEnd} onChange={e => setFormEnd(e.target.value)}
-                    className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
-                </div>
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Break (min)</label>
-                <input type="number" value={formBreak} onChange={e => setFormBreak(Number(e.target.value))}
+                <label className="text-sm text-muted-foreground">Start</label>
+                <input type="time" value={formStart} onChange={e => setFormStart(e.target.value)}
                   className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-sm text-muted-foreground">Tips ({currencySymbol})</label>
-                  <input type="number" value={formTips} onChange={e => setFormTips(Number(e.target.value))}
-                    className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Premiums ({currencySymbol})</label>
-                  <input type="number" value={formPremiums} onChange={e => setFormPremiums(Number(e.target.value))}
-                    className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
-                </div>
+              <div>
+                <label className="text-sm text-muted-foreground">End</label>
+                <input type="time" value={formEnd} onChange={e => setFormEnd(e.target.value)}
+                  className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
               </div>
-              <div className="flex gap-3 pt-2">
-                <button onClick={() => setShowAddShift(false)} className="flex-1 p-3 rounded-xl bg-secondary/60 text-foreground font-medium">Cancel</button>
-                <button onClick={handleAddShift} className="flex-1 p-3 rounded-xl bg-primary text-primary-foreground font-medium">Add Shift</button>
+            </div>
+            <div>
+              <label className="text-sm text-muted-foreground">Break (min)</label>
+              <input type="number" value={formBreak} onChange={e => setFormBreak(Number(e.target.value))}
+                className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="text-sm text-muted-foreground">Tips ({currencySymbol})</label>
+                <input type="number" value={formTips} onChange={e => setFormTips(Number(e.target.value))}
+                  className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
               </div>
+              <div>
+                <label className="text-sm text-muted-foreground">Premiums ({currencySymbol})</label>
+                <input type="number" value={formPremiums} onChange={e => setFormPremiums(Number(e.target.value))}
+                  className="w-full mt-1 p-3 rounded-xl bg-secondary/60 text-foreground border border-border/50 outline-none focus:border-primary/50" />
+              </div>
+            </div>
+            <div className="flex gap-3 pt-2">
+              <button onClick={() => setShowAddShift(false)} className="flex-1 p-3 rounded-xl bg-secondary/60 text-foreground font-medium">Cancel</button>
+              <button onClick={handleAddShift} className="flex-1 p-3 rounded-xl bg-primary text-primary-foreground font-medium">Add Shift</button>
             </div>
           </div>
         </div>
